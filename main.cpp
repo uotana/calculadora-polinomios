@@ -56,7 +56,7 @@ int main(void)
     else cout << "ERRO == com P2,P0\n";
     if (Pvazio != P2) cout << "OK != com Pvazio,P2\n";
     else cout << "ERRO == com Pvazio,P2\n";
-//
+
 //    // Testando predicados
     cout << "==========\n";
     if (Pvazio.empty()) cout << "OK empty com Pvazio\n";
@@ -66,23 +66,23 @@ int main(void)
     if (P2.empty()) cout << "ERRO empty com P2\n";
     else cout << "OK empty com P2\n";
 
-//    if (Pvazio.isZero()) cout << "ERRO isZero com Pvazio\n";
-//    else cout << "OK isZero com Pvazio\n";
-//    if (P0.isZero()) cout << "OK isZero com P0\n";
-//    else cout << "ERRO isZero com P0\n";
-//    if (P2.isZero()) cout << "ERRO isZero com P2\n";
-//    else cout << "OK isZero com P2\n";
-//
-//    // Testando getValor
-//
-//    cout << "==========\n";
-//    cout << "x" << '\t' << "Pvaz" << '\t' << "P0" << '\t' << "P2" << endl;
-//    for (double x=-1.0; x<=3.0; ++x)
-//    {
-//        cout << x << '\t' << Pvazio.getValor(x) << '\t' << P0.getValor(x) << '\t' << P2.getValor(x) << endl;
-//        cout << x << '\t' << Pvazio(x) << '\t' << P0(x) << '\t' << P2(x) << endl;
-//    }
-//    cout << "P2(1.87) deveria dar 0.0 e deu " << P2(sqrt(3.5)) << endl;
+    if (Pvazio.isZero()) cout << "ERRO isZero com Pvazio\n";
+    else cout << "OK isZero com Pvazio\n";
+    if (P0.isZero()) cout << "OK isZero com P0\n";
+    else cout << "ERRO isZero com P0\n";
+    if (P2.isZero()) cout << "ERRO isZero com P2\n";
+    else cout << "OK isZero com P2\n";
+
+    // Testando getValor
+
+    cout << "==========\n";
+    cout << "x" << '\t' << "Pvaz" << '\t' << "P0" << '\t' << "P2" << endl;
+    for (double x=-1.0; x<=3.0; ++x)
+    {
+        cout << x << '\t' << Pvazio.getValor(x) << '\t' << P0.getValor(x) << '\t' << P2.getValor(x) << endl;
+        cout << x << '\t' << Pvazio(x) << '\t' << P0(x) << '\t' << P2(x) << endl;
+    }
+    cout << "P2(1.87) deveria dar 0.0 e deu " << P2(sqrt(3.5)) << endl;
 
     // Testando recriar
 

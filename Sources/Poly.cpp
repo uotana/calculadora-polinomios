@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include "Poly.h"
 
 using namespace std;
@@ -132,4 +133,23 @@ void Poly::recriar(int novoGrau)
 bool Poly::empty() const
 {
     return grau<0;
+}
+bool Poly::isZero() const
+{
+    return (grau == 0 && a[0]==0);
+}
+double Poly::getValor(double x) const
+{
+    if(this->empty() || this->isZero()) return 0.0;
+    double soma = 0.0;
+    for(int i = 0; i<=grau; ++i)
+    {
+        soma += a[i]*pow(x,i);
+    }
+    return soma;
+}
+
+double Poly::operator()(double x) const
+{
+    return this->getValor(x);
 }

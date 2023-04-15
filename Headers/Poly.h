@@ -21,6 +21,9 @@ class Poly
         bool operator==(const Poly& P) const;
         bool operator!=(const Poly& P) const;
         bool empty() const;
+        bool isZero() const;
+        double getValor(double x) const;
+        double operator()(double x) const;
         void recriar(int novoGrau);
 };
 
