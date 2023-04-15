@@ -20,6 +20,7 @@ class Poly
         double operator[](int i) const;
         bool operator==(const Poly& P) const;
         bool operator!=(const Poly& P) const;
+        bool empty() const;
         void recriar(int novoGrau);
 };
 

@@ -128,3 +128,8 @@ void Poly::recriar(int novoGrau)
     cout << "grau: " << grau << a[0];
     return;
 }
+
+bool Poly::empty() const
+{
+    return grau<0;
+}

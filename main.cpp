@@ -58,14 +58,14 @@ int main(void)
     else cout << "ERRO == com Pvazio,P2\n";
 //
 //    // Testando predicados
-//    cout << "==========\n";
-//    if (Pvazio.empty()) cout << "OK empty com Pvazio\n";
-//    else cout << "ERRO empty com Pvazio\n";
-//    if (P0.empty()) cout << "ERRO empty com P0\n";
-//    else cout << "OK empty com P0\n";
-//    if (P2.empty()) cout << "ERRO empty com P2\n";
-//    else cout << "OK empty com P2\n";
-//
+    cout << "==========\n";
+    if (Pvazio.empty()) cout << "OK empty com Pvazio\n";
+    else cout << "ERRO empty com Pvazio\n";
+    if (P0.empty()) cout << "ERRO empty com P0\n";
+    else cout << "OK empty com P0\n";
+    if (P2.empty()) cout << "ERRO empty com P2\n";
+    else cout << "OK empty com P2\n";
+
 //    if (Pvazio.isZero()) cout << "ERRO isZero com Pvazio\n";
 //    else cout << "OK isZero com Pvazio\n";
 //    if (P0.isZero()) cout << "OK isZero com P0\n";
