@@ -12,8 +12,8 @@ class Poly
         Poly(Poly&& P);
         explicit Poly(int g);
         ~Poly();
-        Poly& operator=(const Poly& V);
-        Poly& operator=(Poly&& V);
+        Poly& operator=(const Poly& P);
+        Poly& operator=(Poly&& P);
         int getGrau() const;
         double getCoef(int i) const;
         void setCoef(int i, double novoValor);

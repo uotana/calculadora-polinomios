@@ -26,7 +26,6 @@ Poly::Poly(Poly&& P): grau(0), a(nullptr)
 Poly::Poly(int g): grau(g), a(nullptr)
 {
     cout << "construtor especifico" << endl;
-
     if(g < 0)
     {
         *this = Poly();
@@ -55,13 +54,17 @@ Poly& Poly::operator=(const Poly& P)
     {
         delete[] a;
         grau = P.grau;
-        if(grau > 0) a = new double[grau+1];
+        if(grau >= 0) a = new double[grau+1];
         else a= nullptr;
-        for (int i=0; i<=grau; ++i) a[i] = P.a[i];
+        for (int i=0; i<=grau; ++i)
+        {
+            a[i] = P.a[i];
+            cout << a[i] << " ";
+        }
     }
+    cout << " retornando..." << (this) << endl;
     return *this;
 }
-
 Poly& Poly::operator=(Poly&& P)
 {
     cout << "operator= por movimento" << endl;
@@ -126,10 +129,8 @@ void Poly::recriar(int novoGrau)
 {
     cout<<"recriar"<<endl;
     *this = Poly(novoGrau);
-    cout << "grau: " << grau << a[0];
     return;
 }
-
 bool Poly::empty() const
 {
     return grau<0;
@@ -148,7 +149,6 @@ double Poly::getValor(double x) const
     }
     return soma;
 }
-
 double Poly::operator()(double x) const
 {
     return this->getValor(x);

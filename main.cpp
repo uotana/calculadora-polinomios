@@ -86,16 +86,15 @@ int main(void)
 
     // Testando recriar
 
-//    cout << "==========\n";
-//    P2.recriar(-1000);
-//    cout<< "imprimir" << endl;
-//    imprimir("Vaz", P2);
-//    P2.recriar(0);
-//    imprimir("0", P2);
-//    P2.recriar(2);
-//    imprimir("2", P2);
-//
-//    // Testando << com os casos listados na especificacao
+    cout << "==========\n";
+    P2.recriar(-1000);
+    imprimir("Vaz", P2);
+    P2.recriar(0);
+    imprimir("0", P2);
+    P2.recriar(2);
+    imprimir("2", P2);
+
+    // Testando << com os casos listados na especificacao
 //
 //    cout << "==========\n";
 //    P2.recriar(3);
