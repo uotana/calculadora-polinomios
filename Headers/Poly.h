@@ -6,29 +6,21 @@ class Poly
     private:
         int grau;
         double *a;
-
     public:
-        // Construtor default
         Poly();
-        // Construtor por copia
         Poly(const Poly&);
-        // Construtor por movimento
         Poly(Poly&& P);
-        // Cconstrutor específico
         explicit Poly(int g);
-        // Destrutor
         ~Poly();
-
         Poly& operator=(const Poly& V);
-
         Poly& operator=(Poly&& V);
-
         int getGrau() const;
-
         double getCoef(int i) const;
-
-        void setCoef(int i, double novoCoef);
-
+        void setCoef(int i, double novoValor);
+        double operator[](int i) const;
+        bool operator==(const Poly& P) const;
+        bool operator!=(const Poly& P) const;
+        void recriar(int novoGrau);
 };
 
 #endif // POLY_H

@@ -11,10 +11,7 @@ Poly::Poly(const Poly& P): grau(P.grau), a(nullptr)
     if(this != &P && grau>=0)
     {
         a = new double[P.grau+1];
-        for (int i=0; i<=grau; ++i)
-        {
-            a[i]= P.getCoef(i);
-        }
+        for (int i=0; i<=grau; ++i) a[i]= P.getCoef(i);
     }
 }
 
@@ -27,12 +24,13 @@ Poly::Poly(Poly&& P): grau(0), a(nullptr)
 
 Poly::Poly(int g): grau(g), a(nullptr)
 {
+    cout << "construtor especifico" << endl;
+
     if(g < 0)
     {
         *this = Poly();
         return;
     }
-//    grau = g;
     a = new double [g+1];
     for (int i=0; i<=grau; i++)
     {
@@ -66,18 +64,15 @@ Poly& Poly::operator=(const Poly& P)
 Poly& Poly::operator=(Poly&& P)
 {
     cout << "operator= por movimento" << endl;
-    // Libera conteudo anterior
     delete[] a;
-    // Move o conteudo
     grau = P.grau;
     a = P.a;
-    // Zera o Vetor provisorio
+    cout << "grau: " << grau << endl;
     P.grau = 0;
     P.a = nullptr;
-
+    cout << "--------" << endl;
     return *this;
 }
-
 int Poly:: getGrau() const
 {
     return this->grau;
@@ -106,4 +101,30 @@ void Poly::setCoef(int i, double novoCoef)
         return;
     }
     a[i] = novoCoef;
+}
+double Poly::operator[](int i) const
+{
+    return this->getCoef(i);
+}
+bool Poly::operator==(const Poly& P) const
+{
+    if (this == &P) return true;
+    if(grau != P.grau) return false;
+    for (int i = 0; i <= grau; ++i) {
+        if (a[i] != P.a[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+bool Poly::operator!=(const Poly& P) const
+{
+    return !(*this==P);
+}
+void Poly::recriar(int novoGrau)
+{
+    cout<<"recriar"<<endl;
+    *this = Poly(novoGrau);
+    cout << "grau: " << grau << a[0];
+    return;
 }
