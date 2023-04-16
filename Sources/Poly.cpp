@@ -8,7 +8,7 @@ Poly::Poly(): grau(-1), a(nullptr){}
 
 Poly::Poly(const Poly& P): grau(P.grau), a(nullptr)
 {
-    cout << "construtor por copia" << endl;
+//    cout << "construtor por copia" << endl;
     if(this != &P && grau>=0)
     {
         a = new double[P.grau+1];
@@ -18,14 +18,14 @@ Poly::Poly(const Poly& P): grau(P.grau), a(nullptr)
 
 Poly::Poly(Poly&& P): grau(0), a(nullptr)
 {
-    cout << "construtor por movimento" << endl;
+//    cout << "construtor por movimento" << endl;
     swap(grau, P.grau);
     swap(a, P.a);
 }
 
 Poly::Poly(int g): grau(g), a(nullptr)
 {
-    cout << "construtor especifico" << endl;
+//    cout << "construtor especifico" << endl;
     if(g < 0)
     {
         *this = Poly();
@@ -49,7 +49,7 @@ Poly::~Poly()
 }
 Poly& Poly::operator=(const Poly& P)
 {
-    cout << "operator= por copia" << endl;
+//    cout << "operator= por copia" << endl;
     if (this != &P)
     {
         delete[] a;
@@ -59,22 +59,18 @@ Poly& Poly::operator=(const Poly& P)
         for (int i=0; i<=grau; ++i)
         {
             a[i] = P.a[i];
-            cout << a[i] << " ";
         }
     }
-    cout << " retornando..." << (this) << endl;
     return *this;
 }
 Poly& Poly::operator=(Poly&& P)
 {
-    cout << "operator= por movimento" << endl;
+//    cout << "operator= por movimento" << endl;
     delete[] a;
-    grau = P.grau;
-    a = P.a;
-    cout << "grau: " << grau << endl;
+    this->grau = P.grau;
+    this->a = P.a;
     P.grau = 0;
     P.a = nullptr;
-    cout << "--------" << endl;
     return *this;
 }
 int Poly:: getGrau() const
@@ -93,7 +89,7 @@ void Poly::setCoef(int i, double novoCoef)
         cerr << "Índice inválido." << endl;
         return;
     }
-    if(i == grau && novoCoef == 0.0)
+    if(i == grau && grau!=0 && novoCoef == 0.0)
     {
         cerr << "O coeficiente de maior grau não pode ser nulo, exceto para polinômios de grau zero." << endl;
         return;
@@ -121,7 +117,6 @@ bool Poly::operator!=(const Poly& P) const
 }
 void Poly::recriar(int novoGrau)
 {
-    cout<<"recriar"<<endl;
     *this = Poly(novoGrau);
     return;
 }
