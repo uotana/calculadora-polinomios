@@ -1,11 +1,11 @@
 #include <iostream>
+#include <fstream>
 #include <cmath>
 #include "Poly.h"
 
 using namespace std;
 
 Poly::Poly(): grau(-1), a(nullptr){}
-
 Poly::Poly(const Poly& P): grau(P.grau), a(nullptr)
 {
 //    cout << "construtor por copia" << endl;
@@ -15,14 +15,12 @@ Poly::Poly(const Poly& P): grau(P.grau), a(nullptr)
         for (int i=0; i<=grau; ++i) a[i]= P.getCoef(i);
     }
 }
-
 Poly::Poly(Poly&& P): grau(0), a(nullptr)
 {
 //    cout << "construtor por movimento" << endl;
     swap(grau, P.grau);
     swap(a, P.a);
 }
-
 Poly::Poly(int g): grau(g), a(nullptr)
 {
 //    cout << "construtor especifico" << endl;
@@ -42,7 +40,6 @@ Poly::Poly(int g): grau(g), a(nullptr)
         a[i]= 0.0;
     }
 }
-
 Poly::~Poly()
 {
     delete[] this->a;
@@ -164,7 +161,6 @@ ostream& operator<<(ostream& X, const Poly& P)
     }
     return X;
 }
-
 istream& operator>>(istream& X, Poly& P)
 {
     if(P.empty())
@@ -191,3 +187,18 @@ istream& operator>>(istream& X, Poly& P)
     }
     return X;
 }
+bool Poly::salvar(const string& arquivo) const {
+    ofstream streamOut(arquivo.c_str(), fstream:: out | fstream::app);
+    if (!streamOut.is_open()) return false;
+    streamOut << "POLY " << this->getGrau() << endl;
+    if(this->getGrau() >= 0) {
+        for (int i = 0; i <= this->getGrau(); ++i) {
+            streamOut << this->getCoef(i);
+            if (i < this->getGrau()) streamOut << " ";
+        }
+    }
+    streamOut << endl;
+    streamOut.close();
+    return true;
+}
+
