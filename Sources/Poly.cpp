@@ -98,12 +98,6 @@ void Poly::setCoef(int i, double novoCoef)
         cerr << "O coeficiente de maior grau não pode ser nulo, exceto para polinômios de grau zero." << endl;
         return;
     }
-    if(grau == 0 && novoCoef != 0.0)
-    {
-        cerr << "Todo valor de grau zero resulta em 1." << endl;
-        //this->grau = 1;
-        return;
-    }
     a[i] = novoCoef;
 }
 double Poly::operator[](int i) const
@@ -168,9 +162,9 @@ ostream& operator<<(ostream& X, const Poly& P)
             if ((abs(P.a[i]) != 1) || i == 0) X << (abs(P.a[i]));
             if(i != 0){
                 if (abs(P.a[i]) != 1.0) X << "*";
+                X << "x";
+                if (i > 1) X << "^" << i;
             }
-            X << "x";
-            if (i > 1) X << "^" << i;
         }
     }
     return X;
