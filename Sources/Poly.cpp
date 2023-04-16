@@ -164,3 +164,30 @@ ostream& operator<<(ostream& X, const Poly& P)
     }
     return X;
 }
+
+istream& operator>>(istream& X, Poly& P)
+{
+    if(P.empty())
+    {
+        cerr <<"Erro: polinômio vazio." << endl;
+        return X;
+    }
+    double x;
+    for (int i=P.getGrau(); i>=0; --i)
+    {
+        if(P.getGrau()!=0 && i == P.getGrau())
+        {
+            do
+            {
+                cout << "xˆ" << i << ": ";
+                cin >> x;
+            } while (x == 0.0);
+        }
+        else
+        {   cout << "xˆ" << i << ": ";
+            cin >> x;
+        }
+        P.setCoef(i,x);
+    }
+    return X;
+}
