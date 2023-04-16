@@ -25,6 +25,9 @@ class Poly
         double getValor(double x) const;
         double operator()(double x) const;
         void recriar(int novoGrau);
+        friend std::ostream &operator<<(std::ostream &X, const Poly& P);
 };
+
+
 
 #endif // POLY_H

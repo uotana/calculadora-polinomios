@@ -153,3 +153,25 @@ double Poly::operator()(double x) const
 {
     return this->getValor(x);
 }
+ostream& operator<<(ostream& X, const Poly& P)
+{
+    for(int i = P.grau; i>=0; --i)
+    {
+        if(P.a[i]==0.0){
+            if(i==0 && P.grau==0){
+                return X << P.a[0];
+            }
+        }
+        else{
+            if(P.a[i] < 0) X << "-";
+            else if(i != P.grau) X << "+";
+            if ((abs(P.a[i]) != 1) || i == 0) X << (abs(P.a[i]));
+            if(i != 0){
+                if (abs(P.a[i]) != 1.0) X << "*";
+            }
+            X << "x";
+            if (i > 1) X << "^" << i;
+        }
+    }
+    return X;
+}

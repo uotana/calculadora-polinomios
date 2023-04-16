@@ -95,62 +95,62 @@ int main(void)
     imprimir("2", P2);
 
     // Testando << com os casos listados na especificacao
-//
-//    cout << "==========\n";
-//    P2.recriar(3);
-//    P2.setCoef(0,5.7);
-//    P2.setCoef(1,1.4);
-//    P2.setCoef(2,3.2);
-//    P2.setCoef(3,0.2);
-//    cout << "0.2*x^3+3.2*x^2+1.4*x+5.7" << "\tESPERADO\n";
-//    cout << P2 << "\tOBTIDO\n";
-//
-//    P2.setCoef(0,5.7);
-//    P2.setCoef(1,1.0);
-//    P2.setCoef(2,3.2);
-//    P2.setCoef(3,1.0);
-//    cout << "x^3+3.2*x^2+x+5.7" << "\tESPERADO\n";
-//    cout << P2 << "\tOBTIDO\n";
-//
-//    P2.setCoef(0,5.7);
-//    P2.setCoef(1,-1.4);
-//    P2.setCoef(2,3.2);
-//    P2.setCoef(3,-0.2);
-//    cout << "-0.2*x^3+3.2*x^2-1.4*x+5.7" << "\tESPERADO\n";
-//    cout << P2 << "\tOBTIDO\n";
-//
-//    P2.setCoef(0,5.7);
-//    P2.setCoef(1,-1.0);
-//    P2.setCoef(2,3.2);
-//    P2.setCoef(3,-1.0);
-//    cout << "-x^3+3.2*x^2-x+5.7" << "\tESPERADO\n";
-//    cout << P2 << "\tOBTIDO\n";
-//
-//    P2.setCoef(0,0.0);
-//    P2.setCoef(1,1.4);
-//    P2.setCoef(2,0.0);
-//    P2.setCoef(3,0.2);
-//    cout << "0.2*x^3+1.4*x" << "\tESPERADO\n";
-//    cout << P2 << "\tOBTIDO\n";
-//
-//    P2.recriar(1);
-//    P2.setCoef(0,0.0);
-//    P2.setCoef(1,1.0);
-//    cout << "x" << "\tESPERADO\n";
-//    cout << P2 << "\tOBTIDO\n";
-//
-//    P2.recriar(0);
-//    P2.setCoef(0,1.0);
-//    cout << "1" << "\tESPERADO\n";
-//    cout << P2 << "\tOBTIDO\n";
-//
-//    P2.setCoef(0,0.0);
-//    cout << "0" << "\tESPERADO\n";
-//    cout << P2 << "\tOBTIDO\n";
-//
-//    cout << "><" << "\tESPERADO\n";
-//    cout << '>' << Pvazio << '<' << "\tOBTIDO\n";
-//
-//    return 0;
+
+    cout << "==========\n";
+    P2.recriar(3);
+    P2.setCoef(0,5.7);
+    P2.setCoef(1,1.4);
+    P2.setCoef(2,3.2);
+    P2.setCoef(3,0.2);
+    cout << "0.2*x^3+3.2*x^2+1.4*x+5.7" << "\tESPERADO\n";
+    cout << P2 << "\tOBTIDO\n";
+
+    P2.setCoef(0,5.7);
+    P2.setCoef(1,1.0);
+    P2.setCoef(2,3.2);
+    P2.setCoef(3,1.0);
+    cout << "x^3+3.2*x^2+x+5.7" << "\tESPERADO\n";
+    cout << P2 << "\tOBTIDO\n";
+
+    P2.setCoef(0,5.7);
+    P2.setCoef(1,-1.4);
+    P2.setCoef(2,3.2);
+    P2.setCoef(3,-0.2);
+    cout << "-0.2*x^3+3.2*x^2-1.4*x+5.7" << "\tESPERADO\n";
+    cout << P2 << "\tOBTIDO\n";
+
+    P2.setCoef(0,5.7);
+    P2.setCoef(1,-1.0);
+    P2.setCoef(2,3.2);
+    P2.setCoef(3,-1.0);
+    cout << "-x^3+3.2*x^2-x+5.7" << "\tESPERADO\n";
+    cout << P2 << "\tOBTIDO\n";
+
+    P2.setCoef(0,0.0);
+    P2.setCoef(1,1.4);
+    P2.setCoef(2,0.0);
+    P2.setCoef(3,0.2);
+    cout << "0.2*x^3+1.4*x" << "\tESPERADO\n";
+    cout << P2 << "\tOBTIDO\n";
+
+    P2.recriar(1);
+    P2.setCoef(0,0.0);
+    P2.setCoef(1,1.0);
+    cout << "x" << "\tESPERADO\n";
+    cout << P2 << "\tOBTIDO\n";
+
+    P2.recriar(0);
+    P2.setCoef(0,1.0);
+    cout << "1" << "\tESPERADO\n";
+    cout << P2 << "\tOBTIDO\n";
+
+    P2.setCoef(0,0.0);
+    cout << "0" << "\tESPERADO\n";
+    cout << P2 << "\tOBTIDO\n";
+
+    cout << "><" << "\tESPERADO\n";
+    cout << '>' << Pvazio << '<' << "\tOBTIDO\n";
+
+    return 0;
 }
 
