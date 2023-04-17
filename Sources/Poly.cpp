@@ -8,7 +8,6 @@ using namespace std;
 Poly::Poly(): grau(-1), a(nullptr){}
 Poly::Poly(const Poly& P): grau(P.grau), a(nullptr)
 {
-//    cout << "construtor por copia" << endl;
     if(this != &P && grau>=0)
     {
         a = new double[P.grau+1];
@@ -17,13 +16,11 @@ Poly::Poly(const Poly& P): grau(P.grau), a(nullptr)
 }
 Poly::Poly(Poly&& P): grau(0), a(nullptr)
 {
-//    cout << "construtor por movimento" << endl;
     swap(grau, P.grau);
     swap(a, P.a);
 }
 Poly::Poly(int g): grau(g), a(nullptr)
 {
-//    cout << "construtor especifico" << endl;
     if(g < 0)
     {
         *this = Poly();
@@ -46,7 +43,6 @@ Poly::~Poly()
 }
 Poly& Poly::operator=(const Poly& P)
 {
-//    cout << "operator= por copia" << endl;
     if (this != &P)
     {
         delete[] a;
@@ -62,7 +58,6 @@ Poly& Poly::operator=(const Poly& P)
 }
 Poly& Poly::operator=(Poly&& P)
 {
-//    cout << "operator= por movimento" << endl;
     delete[] a;
     this->grau = P.grau;
     this->a = P.a;
@@ -93,8 +88,7 @@ void Poly::setCoef(int i, double novoCoef)
     }
     a[i] = novoCoef;
 }
-double Poly::operator[](int i) const
-{
+double Poly::operator[](int i) const{
     return this->getCoef(i);
 }
 bool Poly::operator==(const Poly& P) const
@@ -115,7 +109,6 @@ bool Poly::operator!=(const Poly& P) const
 void Poly::recriar(int novoGrau)
 {
     *this = Poly(novoGrau);
-    cout << "P recriado. grau = " << this->grau << endl;
     return;
 }
 bool Poly::empty() const
@@ -212,31 +205,25 @@ bool Poly::ler(const string& arquivo)
     streamIn >> cabecalho;
     if(!streamIn.good() || cabecalho != "POLY")
     {
-        cout << "cabecalho != 'POLY'" << endl;
         streamIn.close();
         return false;
     }
     streamIn >> prov.grau;
-    cout << "grau lido: " << prov.grau << endl;
     if(!streamIn.good())
     {
-        cout << "n tem grau" << endl;
         streamIn.close();
         return false;
     }
     if(prov.grau < 0)
     {
-        cout << "grau menor que zero\n";
         streamIn.close();
         return true;
     }
-
     prov.a = new double[prov.grau+1];
     int count = 0;
     for(int i = 0; i<=prov.grau; ++i)
     {
         streamIn >> prov.a[i];
-        cout << prov.a[i] << " ";
         if(streamIn.fail())
         {
             streamIn.close();
@@ -250,21 +237,17 @@ bool Poly::ler(const string& arquivo)
         streamIn.seekg(-1, ios_base::end);
         streamIn.get(ultimo);
         if(ultimo != '\n') {
-            cout << "final do arquivo" << endl;
-            cout << "n termina com enter" << endl;
             streamIn.close();
             return false;
         }
     }
     if(prov.grau!=0 && prov.a[prov.grau] == 0.0)
     {
-        cout << "maior coef 0"<< endl;
         streamIn.close();
         return false;
     }
     if(count < (prov.grau+1))
     {
-        cout << "+ grau q coef"<< endl;
         streamIn.close();
         return false;
     }
@@ -284,15 +267,18 @@ Poly Poly::operator-() const
     return prov;
 }
 
-Poly Poly::operator+(const Poly& P) const
+Poly Poly:: somaOuSubtrai(const Poly& P, char operador) const
 {
     if((this->empty() && P.empty()) || (this->isZero() && P.isZero())) return *this;
     if(this->empty() && P.isZero()) return P;
     if(this->isZero() && P.empty()) return *this;
 
     Poly resultado(max(this->getGrau(),P.getGrau()));
-    const char operador = '+';
-    for(int i = 0; i <= resultado.getGrau(); ++i) resultado.a[i] = this->getCoef(i) + P.getCoef(i);
+    for(int i = 0; i <= resultado.getGrau(); ++i)
+    {
+        if(operador == '+') resultado.a[i] = this->getCoef(i) + P.getCoef(i);
+        else if(operador == '-')  resultado.a[i] = this->getCoef(i) - P.getCoef(i);
+    }
     int novoGrau = resultado.getGrau();
     while(novoGrau>0 && resultado.a[novoGrau] == 0.0) --novoGrau;
     if(novoGrau != resultado.getGrau())
@@ -308,23 +294,11 @@ Poly Poly::operator+(const Poly& P) const
 
 Poly Poly::operator-(const Poly& P) const
 {
-    if((this->empty() && P.empty()) || (this->isZero() && P.isZero())) return *this;
-    if(this->empty() && P.isZero()) return P;
-    if(this->isZero() && P.empty()) return *this;
-
-    Poly resultado(max(this->getGrau(),P.getGrau()));
-    for(int i = 0; i <= resultado.getGrau(); ++i) resultado.a[i] = this->getCoef(i) - P.getCoef(i);
-    int novoGrau = resultado.getGrau();
-    while(novoGrau>0 && resultado.a[novoGrau] == 0.0) --novoGrau;
-    if(novoGrau != resultado.getGrau())
-    {
-        Poly prov = Poly(novoGrau);
-        prov.grau = novoGrau;
-        prov.a = new double [novoGrau+1];
-        for(int i=0; i <= prov.getGrau(); ++i) prov.a[i] = resultado.a[i];
-        resultado = prov;
-    }
-    return resultado;
+    return this->somaOuSubtrai(P, '-');
+}
+Poly Poly::operator+(const Poly& P) const
+{
+    return this->somaOuSubtrai(P, '+');
 }
 
 Poly Poly::operator*(const Poly& P) const
@@ -335,21 +309,15 @@ Poly Poly::operator*(const Poly& P) const
     if(P.empty() && this->isZero()) return P;
     if(P.empty() || P.isZero()) return P;
 
-    int grauResultado = (this->getGrau() + P.getGrau()) ;
-    Poly resultado = Poly(grauResultado);
+    Poly resultado = Poly(this->getGrau() + P.getGrau());
     resultado.a[resultado.getGrau()] = 0.0;
-//    cout << "grau " << resultado.getGrau() << endl;
-//    cout << "a[i] " << resultado.a[resultado.getGrau()] << endl;
+
     for(int i=0; i<=this->getGrau(); ++i)
     {
         for(int j=0; j<=P.getGrau(); ++j)
         {
-//            cout << "this[" << i << "] * P[" << j << "] = ";
-//            cout << this->getCoef(i)  << " * " << P.getCoef(j) << endl;
             resultado.a[i+j] += (this->getCoef(i) * P.getCoef(j));
-//            cout << "resultado.a[" << i+j << "] " << resultado.a[i+j] <<endl;
         }
     }
-
     return resultado;
 }

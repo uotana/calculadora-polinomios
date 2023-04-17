@@ -6,9 +6,10 @@ class Poly
     private:
         int grau;
         double *a;
+        Poly somaOuSubtrai(const Poly& P, char operador) const;
     public:
         Poly();
-        Poly(const Poly&);
+        Poly(const Poly& P);
         Poly(Poly&& P);
         explicit Poly(int g);
         ~Poly();
