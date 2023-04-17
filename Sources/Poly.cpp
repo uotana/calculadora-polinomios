@@ -201,4 +201,66 @@ bool Poly::salvar(const string& arquivo) const {
     streamOut.close();
     return true;
 }
+bool Poly::ler(const string& arquivo)
+{
+    ifstream streamIn(arquivo.c_str());
+    if (!streamIn.is_open()) return false;
 
+    Poly prov = Poly();
+    string cabecalho;
+    streamIn >> cabecalho;
+    cout << cabecalho << " ";
+    if(!streamIn.good() || cabecalho != "POLY")
+    {
+        streamIn.close();
+        return false;
+    }
+
+    streamIn >> prov.grau;
+    cout << prov.grau << endl;
+    if(!streamIn.good())
+    {
+        streamIn.close();
+        return false;
+    }
+    if(prov.grau < 0)
+    {
+        streamIn.close();
+        return true;
+    }
+    prov.a = new double[prov.grau+1];
+    streamIn >> prov.a[prov.grau];
+    cout << prov.a[prov.grau] << " ";
+    if(!streamIn.good() || (prov.grau != 0 && prov.a[prov.grau] == 0.0))
+    {
+        streamIn.close();
+        return false;
+    }
+
+    int count = 0;
+    if(prov.grau>=0)
+    {
+        for(int i = prov.grau - 1; i>=0; --i)
+        {
+            streamIn >> prov.a[i];
+            if(!streamIn.good())
+            {
+                streamIn.close();
+                return false;
+            }
+            cout << prov.a[i] << " ";
+            ++count;
+        }
+        cout << "count " << count << endl;
+        if(prov.grau > count)
+        {
+            cout << "prov.grau  " << prov.grau << endl;
+            streamIn.close();
+            return false;
+        }
+    }
+
+    streamIn.close();
+    *this = prov;
+    return true;
+}
