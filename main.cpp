@@ -33,7 +33,7 @@ int main(void)
     cout << "\nTESTE COM ARQUIVOS INCORRETOS\n";
     for (i=0; i<=7; ++i)
     {
-        arq = "../" +dir_wrong + "//" + nome_wrong + to_string(i) + ".txt";
+        arq = "../" +dir_wrong + "/" + nome_wrong + to_string(i) + ".txt";
         cout << endl << i << ") Arquivo: " << arq << endl;
         P.recriar(1);
         cout << "Polinomio original P=" << P << endl;
