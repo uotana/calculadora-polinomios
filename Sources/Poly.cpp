@@ -182,7 +182,7 @@ istream& operator>>(istream& X, Poly& P)
     return X;
 }
 bool Poly::salvar(const string& arquivo) const {
-    ofstream streamOut(arquivo.c_str(), fstream:: out | fstream::app);
+    ofstream streamOut(arquivo.c_str(), fstream:: trunc);
     if (!streamOut.is_open()) return false;
     streamOut << "POLY " << this->getGrau() << endl;
     if(this->getGrau() >= 0) {
@@ -212,6 +212,7 @@ bool Poly::ler(const string& arquivo)
     if(!streamIn.good())
     {
         streamIn.close();
+        *this = prov;
         return false;
     }
     if(prov.grau < 0)
