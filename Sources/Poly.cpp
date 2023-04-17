@@ -115,6 +115,7 @@ bool Poly::operator!=(const Poly& P) const
 void Poly::recriar(int novoGrau)
 {
     *this = Poly(novoGrau);
+    cout << "P recriado. grau = " << this->grau << endl;
     return;
 }
 bool Poly::empty() const
@@ -209,57 +210,64 @@ bool Poly::ler(const string& arquivo)
     Poly prov = Poly();
     string cabecalho;
     streamIn >> cabecalho;
-    cout << cabecalho << " ";
     if(!streamIn.good() || cabecalho != "POLY")
     {
+        cout << "cabecalho != 'POLY'" << endl;
         streamIn.close();
         return false;
     }
-
     streamIn >> prov.grau;
-    cout << prov.grau << endl;
+    cout << "grau lido: " << prov.grau << endl;
     if(!streamIn.good())
     {
+        cout << "n tem grau" << endl;
         streamIn.close();
         return false;
     }
     if(prov.grau < 0)
     {
+        cout << "grau menor que zero\n";
         streamIn.close();
         return true;
     }
-    prov.a = new double[prov.grau+1];
-    streamIn >> prov.a[prov.grau];
-    cout << prov.a[prov.grau] << " ";
-    if(!streamIn.good() || (prov.grau != 0 && prov.a[prov.grau] == 0.0))
-    {
-        streamIn.close();
-        return false;
-    }
 
+    prov.a = new double[prov.grau+1];
     int count = 0;
-    if(prov.grau>=0)
+    for(int i = 0; i<=prov.grau; ++i)
     {
-        for(int i = prov.grau - 1; i>=0; --i)
+        streamIn >> prov.a[i];
+        cout << prov.a[i] << " ";
+        if(streamIn.fail())
         {
-            streamIn >> prov.a[i];
-            if(!streamIn.good())
-            {
-                streamIn.close();
-                return false;
-            }
-            cout << prov.a[i] << " ";
-            ++count;
+            streamIn.close();
+            return false;
         }
-        cout << "count " << count << endl;
-        if(prov.grau > count)
-        {
-            cout << "prov.grau  " << prov.grau << endl;
+        ++count;
+    }
+    if (streamIn.eof())
+    {
+        char ultimo;
+        streamIn.seekg(-1, ios_base::end);
+        streamIn.get(ultimo);
+        if(reinterpret_cast<const char *>(ultimo) != "\n") {
+            cout << "final do arquivo" << endl;
+            cout << "n termina com enter" << endl;
             streamIn.close();
             return false;
         }
     }
-
+    if(prov.grau!=0 && prov.a[prov.grau] == 0.0)
+    {
+        cout << "maior coef 0"<< endl;
+        streamIn.close();
+        return false;
+    }
+    if(count < (prov.grau+1))
+    {
+        cout << "+ grau q coef"<< endl;
+        streamIn.close();
+        return false;
+    }
     streamIn.close();
     *this = prov;
     return true;
