@@ -24,6 +24,7 @@ class Poly
         Poly operator-() const;
         Poly operator-(const Poly& P) const;
         Poly operator+(const Poly& P) const;
+        Poly operator*(const Poly& P) const;
         bool empty() const;
         bool isZero() const;
         double getValor(double x) const;

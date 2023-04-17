@@ -326,3 +326,30 @@ Poly Poly::operator-(const Poly& P) const
     }
     return resultado;
 }
+
+Poly Poly::operator*(const Poly& P) const
+{
+    if((this->empty() && P.empty()) || (this->isZero() && P.isZero())) return *this;
+    if(this->empty() && P.isZero()) return *this;
+    if(this->empty() || this->isZero()) return *this;
+    if(P.empty() && this->isZero()) return P;
+    if(P.empty() || P.isZero()) return P;
+
+    int grauResultado = (this->getGrau() + P.getGrau()) ;
+    Poly resultado = Poly(grauResultado);
+    resultado.a[resultado.getGrau()] = 0.0;
+//    cout << "grau " << resultado.getGrau() << endl;
+//    cout << "a[i] " << resultado.a[resultado.getGrau()] << endl;
+    for(int i=0; i<=this->getGrau(); ++i)
+    {
+        for(int j=0; j<=P.getGrau(); ++j)
+        {
+//            cout << "this[" << i << "] * P[" << j << "] = ";
+//            cout << this->getCoef(i)  << " * " << P.getCoef(j) << endl;
+            resultado.a[i+j] += (this->getCoef(i) * P.getCoef(j));
+//            cout << "resultado.a[" << i+j << "] " << resultado.a[i+j] <<endl;
+        }
+    }
+
+    return resultado;
+}
