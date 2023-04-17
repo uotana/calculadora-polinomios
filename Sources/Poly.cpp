@@ -249,7 +249,7 @@ bool Poly::ler(const string& arquivo)
         char ultimo;
         streamIn.seekg(-1, ios_base::end);
         streamIn.get(ultimo);
-        if(reinterpret_cast<const char *>(ultimo) != "\n") {
+        if(ultimo != '\n') {
             cout << "final do arquivo" << endl;
             cout << "n termina com enter" << endl;
             streamIn.close();
@@ -271,4 +271,58 @@ bool Poly::ler(const string& arquivo)
     streamIn.close();
     *this = prov;
     return true;
+}
+
+Poly Poly::operator-() const
+{
+    if(this->empty() || this->isZero()) return *this;
+    Poly prov(this->getGrau());
+    for (int i = 0; i <= this->grau; ++i)
+    {
+        prov.a[i] = -(this->getCoef(i));
+    }
+    return prov;
+}
+
+Poly Poly::operator+(const Poly& P) const
+{
+    if((this->empty() && P.empty()) || (this->isZero() && P.isZero())) return *this;
+    if(this->empty() && P.isZero()) return P;
+    if(this->isZero() && P.empty()) return *this;
+
+    Poly resultado(max(this->getGrau(),P.getGrau()));
+    const char operador = '+';
+    for(int i = 0; i <= resultado.getGrau(); ++i) resultado.a[i] = this->getCoef(i) + P.getCoef(i);
+    int novoGrau = resultado.getGrau();
+    while(novoGrau>0 && resultado.a[novoGrau] == 0.0) --novoGrau;
+    if(novoGrau != resultado.getGrau())
+    {
+        Poly prov = Poly(novoGrau);
+        prov.grau = novoGrau;
+        prov.a = new double [novoGrau+1];
+        for(int i=0; i <= prov.getGrau(); ++i) prov.a[i] = resultado.a[i];
+        resultado = prov;
+    }
+    return resultado;
+}
+
+Poly Poly::operator-(const Poly& P) const
+{
+    if((this->empty() && P.empty()) || (this->isZero() && P.isZero())) return *this;
+    if(this->empty() && P.isZero()) return P;
+    if(this->isZero() && P.empty()) return *this;
+
+    Poly resultado(max(this->getGrau(),P.getGrau()));
+    for(int i = 0; i <= resultado.getGrau(); ++i) resultado.a[i] = this->getCoef(i) - P.getCoef(i);
+    int novoGrau = resultado.getGrau();
+    while(novoGrau>0 && resultado.a[novoGrau] == 0.0) --novoGrau;
+    if(novoGrau != resultado.getGrau())
+    {
+        Poly prov = Poly(novoGrau);
+        prov.grau = novoGrau;
+        prov.a = new double [novoGrau+1];
+        for(int i=0; i <= prov.getGrau(); ++i) prov.a[i] = resultado.a[i];
+        resultado = prov;
+    }
+    return resultado;
 }

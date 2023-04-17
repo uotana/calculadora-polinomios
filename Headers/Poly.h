@@ -20,10 +20,13 @@ class Poly
         double operator[](int i) const;
         bool operator==(const Poly& P) const;
         bool operator!=(const Poly& P) const;
+        double operator()(double x) const;
+        Poly operator-() const;
+        Poly operator-(const Poly& P) const;
+        Poly operator+(const Poly& P) const;
         bool empty() const;
         bool isZero() const;
         double getValor(double x) const;
-        double operator()(double x) const;
         void recriar(int novoGrau);
         bool salvar(const std::string& nomeArquivo) const;
         bool ler(const std::string& nomeArquivo);
